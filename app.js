@@ -19,20 +19,54 @@ function resize() {
 resize();
 window.addEventListener('resize', resize);
 
-// Generate particles. Using a linked list. Quick as lighting ;D
-
-var Particle = function(index, ctx) {
-
+var GRect = function(x, y, width, height) {
   var api = {
-    next: null,
-    update: update
+    touch: touch,
+    render: render
   }
+
+  function isIn(px, py) {
+    if(px < x) return false;
+    if(px > x + width) return false;
+    if(py < y) return false;
+    if(py > py + height) return false;
+    return true;
+  }
+
+  function touch(particle, pos) {
+    if(!isIn(pos.x, pos.y)) {
+      return 1;
+    }
+    if(pos.y > y) {
+      return 0;
+    }
+    return 1;
+  }
+
+  function render(ctx) {
+    ctx.rect(x,y,width,height);
+    //ctx.strokeStyle = '#ff0000';
+    ctx.strokeStyle = 'rgba(150,150,150,1)';
+    ctx.stroke();
+  }
+
+  return api;
+}
+
+var grect = new GRect(width / 4, height / 4, width / 2, height / 2);
+
+var Particle = function(ctx) {
 
   var pos = {
     x: Math.random() * width,
     y: Math.random() * height,
     z: Math.random()
   };
+
+  var api = {
+    update: update,
+    touch: touch
+  }
 
   var angleLerp = .025 + Math.random() * .05;
   var angleBase = Math.PI*.5;
@@ -45,6 +79,11 @@ var Particle = function(index, ctx) {
   var speed = speedBase;
 
   var size = Particle.MIN_SIZE + Particle.MAX_SIZE * pos.z;
+
+  // g object is something which can change my speed
+  function touch(gobject) {
+    speed *= gobject.touch(this, pos);
+  }
 
   function update(time) {
 
@@ -59,8 +98,8 @@ var Particle = function(index, ctx) {
       angle += angleModifier * size * mouse.speedValue * 0.02;
     }
 
-    speed += (speedBase-speed) * .1;
-    angle += (angleBase-angle) * angleLerp;
+    speed += (speedBase - speed) * .1;
+    angle += (angleBase - angle) * angleLerp;
 
     var amod = angle + Math.cos(time * timeModifier * 0.001) * .25;
 
@@ -77,10 +116,6 @@ var Particle = function(index, ctx) {
     ctx.fillStyle = 'white';
     ctx.fillRect(pos.x, pos.y, size, size);
 
-    if (api.next) {
-      api.next.update(time);
-    }
-
   }
 
   return api;
@@ -93,41 +128,40 @@ Particle.MIN_SIZE = .5 * scale;
 Particle.MAX_SIZE = 3 * scale;
 Particle.SPEED_MODIFY_RADIUS = 150;
 
-var particle = generate(5000);
-
-function generate(count) {
-  var particle = new Particle(count, ctx);
-  particle.next = count - 1 > 0 ? generate(count - 1) : null;
-  return particle;
-}
+var particles = _.map(Array(3000), function() {
+  return new Particle(ctx);
+})
 
 // Per frame updates
-
 update();
+
 
 function update(time) {
 
-if (time !== undefined) {
+  if (time !== undefined) {
 
-  // Clear canvas
+    // Clear canvas
 
-  ctx.clearRect(0, 0, width, height);
+    ctx.clearRect(0, 0, width, height);
 
-  // Update particles
+    // Update particles
 
-  particle.update(time);
+    _.each(particles, function(p) {
+      p.touch(grect);
+      p.update(time);
+    });
 
-  mouse.speedTarget *= .95;
-  mouse.speedCurrent += (mouse.speedTarget - mouse.speedCurrent) * .9;
-  mouse.speedValue = mouse.speedCurrent < 5 ? mouse.speedCurrent / 5 : 5;
+    grect.render(ctx);
 
-  Particle.SPEED_MODIFY_RADIUS = mouse.speedCurrent * 5;
+    mouse.speedTarget *= .95;
+    mouse.speedCurrent += (mouse.speedTarget - mouse.speedCurrent) * .9;
+    mouse.speedValue = mouse.speedCurrent < 5 ? mouse.speedCurrent / 5 : 5;
 
-}
+    Particle.SPEED_MODIFY_RADIUS = mouse.speedCurrent * 5;
 
+  }
 
-
-requestAnimationFrame(update);
+  requestAnimationFrame(update);
 
 }
 
