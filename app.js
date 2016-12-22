@@ -8,36 +8,17 @@ var colours = {
   background: '#111'
 };
 
-var canvas = $('canvas').get()[0];
+var canvas = $('#render').get()[0];
 var ctx = canvas.getContext('2d');
 
-
-function resize() {
-  width = canvas.width = window.innerWidth * scale;
-  height = canvas.height = window.innerHeight * scale;
-}
-resize();
-window.addEventListener('resize', resize);
-
-var GRect = function(x, y, width, height) {
+var GRect = function() {
   var api = {
     touch: touch,
     render: render
   }
 
-  function isIn(px, py) {
-    if(px < x) return false;
-    if(px > x + width) return false;
-    if(py < y) return false;
-    if(py > py + height) return false;
-    return true;
-  }
-
   function touch(particle, pos) {
-    if(!isIn(pos.x, pos.y)) {
-      return 1;
-    }
-    if(pos.y > y) {
+    if(GeometryBitmap.getFill(pos.x, pos.y)) {
       return 0;
     }
     return 1;
@@ -53,7 +34,20 @@ var GRect = function(x, y, width, height) {
   return api;
 }
 
-var grect = new GRect(width / 4, height / 4, width / 2, height / 2);
+
+GeometryBitmap.init();
+
+function resize() {
+  width = canvas.width = window.innerWidth * scale;
+  height = canvas.height = window.innerHeight * scale;
+  GeometryBitmap.resize(width, height);
+}
+resize();
+window.addEventListener('resize', resize);
+
+GeometryBitmap.setText('Test text');
+
+//var grect = new GRect(width / 4, height / 4, width / 2, height / 2);
 
 var Particle = function(ctx) {
 
@@ -90,11 +84,11 @@ var Particle = function(ctx) {
     // Update
     var d = distanceBetween(pos, mouse);
     var a = angleBetween(pos, mouse);
+
     if (d < Particle.SPEED_MODIFY_RADIUS) {
       var speedEffect = (1 - d / Particle.SPEED_MODIFY_RADIUS) *
         (1 + mouse.speedValue) * .5;
       speed += (speedEffect - speed) * .15;
-
       angle += angleModifier * size * mouse.speedValue * 0.02;
     }
 
@@ -135,7 +129,7 @@ var particles = _.map(Array(3000), function() {
 // Per frame updates
 update();
 
-
+var grect = new GRect();
 function update(time) {
 
   if (time !== undefined) {
@@ -146,12 +140,12 @@ function update(time) {
 
     // Update particles
 
-    _.each(particles, function(p) {
+    _.each(particles, function(p, i) {
       p.touch(grect);
       p.update(time);
     });
 
-    grect.render(ctx);
+    //grect.render(ctx);
 
     mouse.speedTarget *= .95;
     mouse.speedCurrent += (mouse.speedTarget - mouse.speedCurrent) * .9;
@@ -173,7 +167,7 @@ var mouse = {
   angle: 0,
   speedTarget: 0,
   speedCurrent: 0,
-  speedVal: 0
+  speedValue: 0
 };
 
 window.addEventListener('mousemove', mouseMoveHandler);
