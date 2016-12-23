@@ -45,7 +45,7 @@ function resize() {
 resize();
 window.addEventListener('resize', resize);
 
-GeometryBitmap.setText('Test text');
+GeometryBitmap.setText('Я люблю Москву и СПБ');
 
 //var grect = new GRect(width / 4, height / 4, width / 2, height / 2);
 
