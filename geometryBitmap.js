@@ -6,6 +6,8 @@ GeometryBitmap.height = undefined;
 GeometryBitmap.FONT_SIZE = 100;
 GeometryBitmap.LINE_HEIGHT = 120;
 
+GeometryBitmap._lastPosition = [undefined, undefined];
+
 GeometryBitmap.init = function() {
   var canvas = $('#geometryBitmap').get()[0];
   var ctx = canvas.getContext('2d');
@@ -28,7 +30,7 @@ GeometryBitmap.setText = function(text) {
     var context = GeometryBitmap.ctx;
     var x = GeometryBitmap.width / 2;
     var y = GeometryBitmap.height / 2;
-    var maxWidth = GeometryBitmap.width;
+    var maxWidth = GeometryBitmap.width * 0.9;
 
     var words = text.split(' ');
     var line = '';
@@ -49,14 +51,21 @@ GeometryBitmap.setText = function(text) {
     }
 
     textLines.push(line);
-    //alert(linesCount);
-    var totalHeight = GeometryBitmap.LINE_HEIGHT * (linesCount - 1) + GeometryBitmap.FONT_SIZE;
+
+    var totalHeight = GeometryBitmap.LINE_HEIGHT * (linesCount - 1)
+      + GeometryBitmap.FONT_SIZE;
     var basicOffset = y + GeometryBitmap.FONT_SIZE / 2 - totalHeight / 2;
     _.each(textLines, function(l, i) {
       var offset = basicOffset;
+      offset += GeometryBitmap.FONT_SIZE / 2;
       offset += i * GeometryBitmap.LINE_HEIGHT;
       context.fillText(l, x, offset);
     });
+
+    GeometryBitmap._lastPosition[0] = context.measureText(line).width / 2
+      + GeometryBitmap.width / 2 - 20;
+    GeometryBitmap._lastPosition[1] = basicOffset + totalHeight
+      - GeometryBitmap.FONT_SIZE;
 
   }
 
@@ -74,7 +83,7 @@ GeometryBitmap.setText = function(text) {
 }
 
 GeometryBitmap.getLastPosition = function() {
-  return 1;
+  return GeometryBitmap._lastPosition;
 }
 
 GeometryBitmap.getFill = function(x, y) {

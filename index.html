@@ -8,7 +8,6 @@
       overflow: hidden;
       padding: 0;
     }
-
     canvas {
       width: 100%;
       height: 100%;
@@ -28,7 +27,20 @@
       height: 100%;
       display: block;
       background: none;
-      color: none
+      color: none;
+      font-size: 1;
+      cursor: default;
+    }
+    #footer {
+      position: absolute;
+      height: 10%;
+      bottom: 0;
+      width: 100%;
+    }
+    #footer .btn {
+      text-align: center;
+      display: block;
+      margin: auto;
     }
   </style>
 
@@ -41,11 +53,18 @@
 
 <body>
 
-  <canvas id="geometryBitmap" ></canvas>
+  <script>
+    var EDIT_MODE = true;
+    var TEXT = 'Hi, frien';
+  </script>
   <canvas id="render" ></canvas>
-  <textarea id="textInput">
+  <canvas id="geometryBitmap" ></canvas>
 
-  </textarea>
+  <textarea id="textInput"></textarea>
+
+  <div id="footer">
+    <input type="button" class="btn" value="Сохранить" />
+  </div>
 
   <script src="geometryBitmap.js"></script>
   <script src="textInput.js"></script>

@@ -34,6 +34,25 @@ var GRect = function() {
   return api;
 }
 
+var EditCursor = {}
+EditCursor._localTime = 0;
+EditCursor._opacity = 0;
+EditCursor.update = function(time) {
+  EditCursor._localTime += (time % Math.PI) / 30;
+  if(EditCursor._localTime > Math.PI) {
+    EditCursor._localTime -= Math.PI;
+  }
+  EditCursor._opacity = 0.3 + Math.abs(Math.sin(EditCursor._localTime));
+}
+
+EditCursor.render = function(ctx) {
+  var pos = GeometryBitmap.getLastPosition();
+  var w = 2;
+  var h = GeometryBitmap.FONT_SIZE;
+  ctx.fillStyle = 'rgba(150,150,150,' + EditCursor._opacity + ')';
+  ctx.fillRect(pos[0], pos[1] - h/2, w, h);
+}
+
 
 GeometryBitmap.init();
 
@@ -44,8 +63,7 @@ function resize() {
 }
 resize();
 window.addEventListener('resize', resize);
-
-GeometryBitmap.setText('Я люблю Москву и СПБ');
+GeometryBitmap.setText(TEXT);
 
 //var grect = new GRect(width / 4, height / 4, width / 2, height / 2);
 
@@ -147,6 +165,11 @@ function update(time) {
 
     //grect.render(ctx);
 
+    if(EDIT_MODE) {
+      EditCursor.update(time);
+      EditCursor.render(ctx);
+    }
+
     mouse.speedTarget *= .95;
     mouse.speedCurrent += (mouse.speedTarget - mouse.speedCurrent) * .9;
     mouse.speedValue = mouse.speedCurrent < 5 ? mouse.speedCurrent / 5 : 5;
@@ -194,6 +217,6 @@ function angleBetween(a, b) {
 }
 
 
-
-
-TextInput.init();
+if(EDIT_MODE) {
+  TextInput.init();
+}
