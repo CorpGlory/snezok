@@ -28,8 +28,8 @@ GeometryBitmap.setText = function(text) {
   function wrapText(text) {
 
     var context = GeometryBitmap.ctx;
-    var x = GeometryBitmap.width / 2;
-    var y = GeometryBitmap.height / 2;
+    var x = GeometryBitmap.width * 0.5;
+    var y = GeometryBitmap.height * 0.45;
     var maxWidth = GeometryBitmap.width * 0.9;
 
     var words = text.split(' ');

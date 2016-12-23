@@ -7,6 +7,8 @@
       margin: 0;
       overflow: hidden;
       padding: 0;
+      color: white;
+      font-family: Arial;
     }
     canvas {
       width: 100%;
@@ -33,15 +35,62 @@
     }
     #footer {
       position: absolute;
-      height: 10%;
+      height: 8%;
+      min-height: 50px;
       bottom: 0;
       width: 100%;
     }
-    #footer .btn {
+
+    .btn {
+      display: inline-block;
+      padding: 6px 12px;
+      margin-bottom: 0;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.42857143;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      -ms-touch-action: manipulation;
+      touch-action: manipulation;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      background-image: none;
+      border: 1px solid transparent;
+      border-radius: 4px;
       text-align: center;
       display: block;
       margin: auto;
+      background: none;
+      color: white;
+      border: 1px solid white;
+      border-radius: 6px;
+      text-decoration: none;
     }
+    .btn:hover {
+      background: #555
+    }
+    .actionBtn {
+      position:absolute; left: 20px;
+    }
+    #inputForm {
+      display: none;
+    }
+    #editorial {
+      position: absolute;
+      width: 100%;
+      bottom: 14%;
+      text-align: center;;
+    }
+    #editButton {
+      display: none;
+    }
+
+
+
   </style>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.4.0/d3.min.js"></script>
@@ -55,16 +104,27 @@
 
   <script>
     var EDIT_MODE = true;
-    var TEXT = 'Hi, frien';
+    var TEXT = 'Input Text';
   </script>
   <canvas id="render" ></canvas>
   <canvas id="geometryBitmap" ></canvas>
 
-  <textarea id="textInput"></textarea>
+
+  <form id="inputForm" action="/create" method="post">
+    <div id="editorial">
+      <strong>Введите текст поздравления</strong><br>
+      <span>ограничение 40 символов</span>
+    </div>
+    <textarea id="textInput" maxlength="40"></textarea>
+    <div id="footer">
+      <input type="submit" class="btn actionBtn"  value="cохранить" />
+    </div>
+  </form>
 
   <div id="footer">
-    <input type="button" class="btn" value="Сохранить" />
+    <a href="create" id="editButton" class="btn actionBtn" > редактировать </a>
   </div>
+
 
   <script src="geometryBitmap.js"></script>
   <script src="textInput.js"></script>

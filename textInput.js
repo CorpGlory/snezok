@@ -10,4 +10,5 @@ TextInput.init = function() {
   setTimeout(function() {
    $('#textInput').focus();
   }, 1);
+  $('#inputForm').show();
 }

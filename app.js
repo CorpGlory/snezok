@@ -220,4 +220,6 @@ function angleBetween(a, b) {
 
 if(EDIT_MODE) {
   TextInput.init();
+} else {
+  $('#editButton').show();
 }
