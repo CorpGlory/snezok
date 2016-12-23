@@ -60,7 +60,6 @@ GeometryBitmap.setText = function(text) {
 
   }
 
-
   GeometryBitmap.text = text;
   GeometryBitmap.ctx.clearRect(
     0, 0, GeometryBitmap.width, GeometryBitmap.height
@@ -74,6 +73,10 @@ GeometryBitmap.setText = function(text) {
   }
 }
 
+GeometryBitmap.getLastPosition = function() {
+  return 1;
+}
+
 GeometryBitmap.getFill = function(x, y) {
   var x = Math.round(x);
   var y = Math.round(y);
@@ -83,11 +86,6 @@ GeometryBitmap.getFill = function(x, y) {
   if(x >= GeometryBitmap.width || y >= GeometryBitmap.height) {
     return false;
   }
-  var p = undefined;
-  try {
-    p = GeometryBitmap.ctx.getImageData(x, y, 1, 1).data;
-  } catch (e) {
-    console.log(e);
-  }
+  p = GeometryBitmap.ctx.getImageData(x, y, 1, 1).data;
   return p[0] === 255;
 }
