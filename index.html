@@ -105,10 +105,13 @@
   <script>
     var EDIT_MODE = false;
     var hash = window.location.hash.substr(1);
+    var TEXT = 'Input Text';
+    // TODO: remove it in production
     if(hash === 'edit') {
       EDIT_MODE = true;
+    } else {
+      TEXT = hash
     }
-    var TEXT = 'Input Text';
   </script>
   <canvas id="render" ></canvas>
   <canvas id="geometryBitmap" ></canvas>
