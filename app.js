@@ -111,7 +111,7 @@ var Particle = function(ctx) {
       angle += angleModifier * size * mouse.speedValue * 0.02;
     }
 
-    speed += (speedBase - speed) * .1;
+    speed += (speedBase - speed) * .03;
     angle += (angleBase - angle) * angleLerp;
 
     var amod = angle + Math.cos(time * timeModifier * 0.001) * .25;
@@ -135,9 +135,9 @@ var Particle = function(ctx) {
 
 }
 
-Particle.MIN_SPEED = .5 * scale;
-Particle.MAX_SPEED = 1 * scale;
-Particle.MIN_SIZE = .5 * scale;
+Particle.MIN_SPEED = .1 * scale;
+Particle.MAX_SPEED = 5 * scale;
+Particle.MIN_SIZE = .7 * scale;
 Particle.MAX_SIZE = 3 * scale;
 Particle.SPEED_MODIFY_RADIUS = 150;
 
