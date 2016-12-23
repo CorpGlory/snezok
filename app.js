@@ -49,8 +49,9 @@ EditCursor.render = function(ctx) {
   var pos = GeometryBitmap.getLastPosition();
   var w = 2;
   var h = GeometryBitmap.FONT_SIZE;
+  var y = pos[1] - h/2 + h * 0.1;
   ctx.fillStyle = 'rgba(150,150,150,' + EditCursor._opacity + ')';
-  ctx.fillRect(pos[0], pos[1] - h/2, w, h);
+  ctx.fillRect(pos[0], y, w, h);
 }
 
 
