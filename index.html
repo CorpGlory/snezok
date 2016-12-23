@@ -103,7 +103,11 @@
 <body>
 
   <script>
-    var EDIT_MODE = true;
+    var EDIT_MODE = false;
+    var hash = window.location.hash.substr(1);
+    if(hash === 'edit') {
+      EDIT_MODE = true;
+    }
     var TEXT = 'Input Text';
   </script>
   <canvas id="render" ></canvas>
