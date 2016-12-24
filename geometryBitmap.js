@@ -7,6 +7,7 @@ GeometryBitmap.FONT_SIZE = 100;
 GeometryBitmap.LINE_HEIGHT = 120;
 
 GeometryBitmap._lastPosition = [undefined, undefined];
+GeometryBitmap._canvasBuffer = undefined;
 
 GeometryBitmap.init = function() {
   var canvas = $('#geometryBitmap').get()[0];
@@ -16,6 +17,7 @@ GeometryBitmap.init = function() {
 }
 
 GeometryBitmap.resize = function(width, height) {
+  console.log(width * height);
   GeometryBitmap.width = width;
   GeometryBitmap.height = height;
   GeometryBitmap.canvas.width = width;
@@ -80,6 +82,10 @@ GeometryBitmap.setText = function(text) {
   if(GeometryBitmap.text !== undefined) {
     wrapText(GeometryBitmap.text);
   }
+
+  GeometryBitmap._canvasBuffer = GeometryBitmap.ctx.getImageData(
+    0, 0, GeometryBitmap.width, GeometryBitmap.height
+  ).data;
 }
 
 GeometryBitmap.getLastPosition = function() {
@@ -95,6 +101,6 @@ GeometryBitmap.getFill = function(x, y) {
   if(x >= GeometryBitmap.width || y >= GeometryBitmap.height) {
     return false;
   }
-  p = GeometryBitmap.ctx.getImageData(x, y, 1, 1).data;
-  return p[0] === 255;
+  var i = 4 * (GeometryBitmap.width * y + x);
+  return GeometryBitmap._canvasBuffer[i] === 255;
 }
