@@ -1,108 +1,11 @@
 <html>
 <head>
 
-  <style>
-    html, body {
-      background-color: #111118;
-      margin: 0;
-      overflow: hidden;
-      padding: 0;
-      color: white;
-      font-family: Arial;
-    }
-    canvas {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0px;
-      left: 0px;
-    }
-    #geometryBitmap {
-      display: none;
-    }
-    /*#render {
-      display: none;
-    }*/
-    #textInput {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      display: block;
-      background: none;
-      color: none;
-      font-size: 1;
-      cursor: default;
-    }
-    #footer {
-      position: absolute;
-      height: 8%;
-      min-height: 50px;
-      bottom: 0;
-      width: 100%;
-    }
+  <link rel="stylesheet" type="text/css" href="style.css">
 
-    .btn {
-      display: inline-block;
-      padding: 6px 12px;
-      margin-bottom: 0;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 1.42857143;
-      text-align: center;
-      white-space: nowrap;
-      vertical-align: middle;
-      -ms-touch-action: manipulation;
-      touch-action: manipulation;
-      cursor: pointer;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      background-image: none;
-      border: 1px solid transparent;
-      border-radius: 4px;
-      text-align: center;
-      display: block;
-      margin: auto;
-      background: none;
-      color: white;
-      border: 1px solid white;
-      border-radius: 6px;
-      text-decoration: none;
-
-    }
-    .btn:hover {
-      background: #555
-    }
-    .actionBtn {
-      position:absolute; left: 20px;
-      z-index: 999999;
-    }
-    #inputForm {
-      display: none;
-    }
-    #editorial {
-      position: absolute;
-      width: 100%;
-      bottom: 14%;
-      text-align: center;
-    }
-    #editButton {
-      display: none;
-    }
-    #logo {
-      position: absolute;;
-      z-index: 99999;
-      top: 3%;
-      left: 3%;
-    }
-
-  </style>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.4.0/d3.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.2/lodash.min.js"></script>
-
+  <meta name="description" content="Create your showy letter">
 
 </head>
 
@@ -146,10 +49,18 @@
     <img src="imgs/PM_Logo.svg">
   </a>
 
+  <div class="socialButtons">
+    <a href="mailto:yourfriend@gmail.com" class="the-icons span3"><i class="demo-icon icon-mail">&#xe800;</i></a>
+    <a data-social="facebook" href="#" class="the-icons span3"><i class="demo-icon icon-facebook">&#xf09a;</i></a>
+    <a data-social="vkontakte" href="#" class="the-icons span3"><i class="demo-icon icon-vkontakte">&#xf189;</i></a>
+    
+  </div>
+
 
   <script src="geometryBitmap.js"></script>
   <script src="textInput.js"></script>
   <script src="app.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.goodshare.js/4/goodshare.min.js"></script>
 </body>
 
 

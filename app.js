@@ -1,3 +1,7 @@
+// DO YOU LIKE
+// creative coding?
+// go http://corpglory.com/join
+
 Array.prototype.random = function() {
   return this[Math.floor(Math.random() * this.length)];
 }
