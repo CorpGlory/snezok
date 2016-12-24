@@ -1,13 +1,15 @@
 <html>
 <head>
-
-  <link rel="stylesheet" type="text/css" href="style.css">
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.2/lodash.min.js"></script>
   <title>Create your showy letter</title>
   <meta name="description" content="Create your showy letter">
+
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.2/lodash.min.js"></script>
+
   <link rel="image_src" href="https://moneywall.io/assets/landing/16x16_ico-ab543349a93ab6e7180ad91469b8411dd7b2ecc472cc1c7b68bbd6f4043cc7b4.png"/>
+
+  <script src="lang.js"></script>
 </head>
 
 <body>
@@ -33,17 +35,23 @@
 
   <div id="inputForm">
     <div id="editorial">
-      <strong>Введите текст поздравления</strong><br>
-      <span>ограничение 40 символов</span>
+      <strong>
+       <script> document.write(Lang.local['editorial.title']) </script>
+      </strong><br>
+      <span><script> document.write(Lang.local['editorial.span']) </script></span>
     </div>
     <textarea id="textInput" maxlength="40"></textarea>
     <div id="footer">
-      <a href="javascript:TextInput.submit()"  class="btn actionBtn" > сохранить </a>
+      <a href="javascript:TextInput.submit()"  class="btn actionBtn" >
+        <script> document.write(Lang.local['ui.save']) </script>
+      </a>
     </div>
   </div>
 
   <div id="footer">
-    <a href="javascript:gotoEdit()" id="editButton" class="btn actionBtn" > редактировать </a>
+    <a href="javascript:gotoEdit()" id="editButton" class="btn actionBtn" >
+      <script> document.write(Lang.local['ui.edit']) </script>
+    </a>
   </div>
 
   <a href="//polymus.ru" id="logo">
