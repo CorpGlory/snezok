@@ -223,3 +223,9 @@ if(EDIT_MODE) {
 } else {
   $('#editButton').show();
 }
+
+
+function gotoEdit() {
+  window.location = '#/edit/' + btoa(TEXT);
+  window.location.reload(true);
+}

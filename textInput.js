@@ -1,8 +1,12 @@
 var TextInput = {}
 
+TextInput._text = TEXT;
 TextInput.init = function() {
   $('#textInput').val(TEXT);
+
+  $('#editButton').attr('href', '#/edit/' + btoa(TEXT));
   $('#textInput').bind('input propertychange', function() {
+    TextInput._text = this.value;
     GeometryBitmap.setText(this.value)
   });
   $('#geometryBitmap').fadeTo('fast', 0.2);
@@ -19,5 +23,6 @@ TextInput.init = function() {
 }
 
 TextInput.submit = function() {
-  alert('asd');
+  window.location = "#" + btoa(TextInput._text)
+  window.location.reload(true);
 }

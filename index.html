@@ -69,12 +69,14 @@
       border: 1px solid white;
       border-radius: 6px;
       text-decoration: none;
+
     }
     .btn:hover {
       background: #555
     }
     .actionBtn {
       position:absolute; left: 20px;
+      z-index: 999999;
     }
     #inputForm {
       display: none;
@@ -88,8 +90,10 @@
     #editButton {
       display: none;
     }
-
-
+    #logo {
+      position: relative;
+      z-index: 99999;
+    }
 
   </style>
 
@@ -106,14 +110,18 @@
     var EDIT_MODE = false;
     var hash = window.location.hash.substr(1);
     var TEXT = 'Input Text';
-    // TODO: remove it in production
-    if(!hash) {
+    if(hash.startsWith('/edit/')) {
       EDIT_MODE = true;
+      TEXT = atob(hash.substr('/edit/'.length));
     } else {
-      TEXT = atob(hash);
+      if(!hash) {
+        EDIT_MODE = true;
+      } else {
+        TEXT = atob(hash);
+      }
     }
   </script>
-  <canvas id="render" ></canvas>
+  <canvas id="render"></canvas>
   <canvas id="geometryBitmap" ></canvas>
 
 
@@ -124,18 +132,18 @@
     </div>
     <textarea id="textInput" maxlength="40"></textarea>
     <div id="footer">
-      <input type="submit" class="btn actionBtn"  value="cохранить" />
-      <a href="javascript://TextInput.submit()" id="editButton" class="btn actionBtn" > редактировать </a>
+      <a href="javascript:TextInput.submit()"  class="btn actionBtn" > сохранить </a>
     </div>
   </div>
 
   <div id="footer">
-    <a href="create" id="editButton" class="btn actionBtn" > редактировать </a>
+    <a href="javascript:gotoEdit()" id="editButton" class="btn actionBtn" > редактировать </a>
   </div>
 
-  <a href="">
+  <a href="//polymus.ru" id="logo">
     <img src="imgs/PM_Logo.svg">
   </a>
+
 
   <script src="geometryBitmap.js"></script>
   <script src="textInput.js"></script>
