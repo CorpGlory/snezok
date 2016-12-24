@@ -12,8 +12,8 @@ Lang.res.ru = {
   "meta.description": "Создай своб открытку",
   "editorial.title" : "Введите текст поздравления",
   "editorial.span" : "ограничение 40 символов",
-  "ui.save" : "СОЗДАТЬ СВОЕ",
-  "ui.edit" : "СОХАРИТЬ И ОПУБЛИКОВАТЬ",
+  "ui.save" : "СОХАРИТЬ И ОПУБЛИКОВАТЬ",
+  "ui.edit" : "СОЗДАТЬ СВОЕ",
 }
 
 var language = window.navigator.userLanguage || window.navigator.language;
