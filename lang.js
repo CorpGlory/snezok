@@ -3,8 +3,8 @@ Lang.res = {}
 Lang.res.en = {
   "editorial.title" : "Enter your text",
   "editorial.span" : "at most 40 symbols",
-  "ui.save" : "save",
-  "ui.edit" : "edit",
+  "ui.save" : "SAVE AND PUBLISH",
+  "ui.edit" : "CREATE YOUR OWN",
 }
 
 Lang.res.ru = {
@@ -12,8 +12,8 @@ Lang.res.ru = {
   "meta.description": "Создай своб открытку",
   "editorial.title" : "Введите текст поздравления",
   "editorial.span" : "ограничение 40 символов",
-  "ui.save" : "сохранить",
-  "ui.edit" : "редактировать",
+  "ui.save" : "СОЗДАТЬ СВОЕ",
+  "ui.edit" : "СОХАРИТЬ И ОПУБЛИКОВАТЬ",
 }
 
 var language = window.navigator.userLanguage || window.navigator.language;
