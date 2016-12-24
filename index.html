@@ -9,7 +9,9 @@
 
   <link rel="image_src" href="https://moneywall.io/assets/landing/16x16_ico-ab543349a93ab6e7180ad91469b8411dd7b2ecc472cc1c7b68bbd6f4043cc7b4.png"/>
 
+  <script src="encoding.js"></script>
   <script src="lang.js"></script>
+  <meta charset="utf-8" />
 </head>
 
 <body>
@@ -20,12 +22,12 @@
     var TEXT = 'Input Text';
     if(hash.startsWith('/edit/')) {
       EDIT_MODE = true;
-      TEXT = atob(hash.substr('/edit/'.length));
+      TEXT = strDecode(hash.substr('/edit/'.length));
     } else {
       if(!hash) {
         EDIT_MODE = true;
       } else {
-        TEXT = atob(hash);
+        TEXT = strDecode(hash);
       }
     }
   </script>

@@ -26,7 +26,7 @@ if(language.toLocaleLowerCase().indexOf('ru') > -1) {
   var meta=document.getElementsByTagName("meta");
   for (var i=0; i<meta.length; i++) {
     if (meta[i].name.toLowerCase()=="description") {
-        meta[i].content = Lang.local['meta.description'];
+      meta[i].content = Lang.local['meta.description'];
     }
   }
 }

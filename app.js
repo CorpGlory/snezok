@@ -230,6 +230,6 @@ if(EDIT_MODE) {
 
 
 function gotoEdit() {
-  window.location = '#/edit/' + btoa(TEXT);
+  window.location = '#/edit/' + strEncode(TEXT);
   window.location.reload(true);
 }
