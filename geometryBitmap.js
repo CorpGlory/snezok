@@ -17,7 +17,6 @@ GeometryBitmap.init = function() {
 }
 
 GeometryBitmap.resize = function(width, height) {
-  console.log(width * height);
   GeometryBitmap.width = width;
   GeometryBitmap.height = height;
   GeometryBitmap.canvas.width = width;

@@ -11,4 +11,13 @@ TextInput.init = function() {
    $('#textInput').focus();
   }, 1);
   $('#inputForm').show();
+
+  $('#inputForm .actionBtn').click(function() {
+    window.location = "#asdasd"
+    window.location.reload(true);
+  });
+}
+
+TextInput.submit = function() {
+  alert('asd');
 }

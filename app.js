@@ -141,7 +141,7 @@ Particle.MIN_SIZE = .6 * scale;
 Particle.MAX_SIZE = 2 * scale;
 Particle.SPEED_MODIFY_RADIUS = 150;
 
-var particles = _.map(Array(2500), function() {
+var particles = _.map(Array(3000), function() {
   return new Particle(ctx);
 })
 

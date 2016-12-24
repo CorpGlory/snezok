@@ -83,7 +83,7 @@
       position: absolute;
       width: 100%;
       bottom: 14%;
-      text-align: center;;
+      text-align: center;
     }
     #editButton {
       display: none;
@@ -107,17 +107,17 @@
     var hash = window.location.hash.substr(1);
     var TEXT = 'Input Text';
     // TODO: remove it in production
-    if(hash === 'edit') {
+    if(!hash) {
       EDIT_MODE = true;
     } else {
-      TEXT = hash
+      TEXT = atob(hash);
     }
   </script>
   <canvas id="render" ></canvas>
   <canvas id="geometryBitmap" ></canvas>
 
 
-  <form id="inputForm" action="/create" method="post">
+  <div id="inputForm">
     <div id="editorial">
       <strong>Введите текст поздравления</strong><br>
       <span>ограничение 40 символов</span>
@@ -125,12 +125,17 @@
     <textarea id="textInput" maxlength="40"></textarea>
     <div id="footer">
       <input type="submit" class="btn actionBtn"  value="cохранить" />
+      <a href="javascript://TextInput.submit()" id="editButton" class="btn actionBtn" > редактировать </a>
     </div>
-  </form>
+  </div>
 
   <div id="footer">
     <a href="create" id="editButton" class="btn actionBtn" > редактировать </a>
   </div>
+
+  <a href="">
+    <img src="imgs/PM_Logo.svg">
+  </a>
 
   <script src="geometryBitmap.js"></script>
   <script src="textInput.js"></script>
