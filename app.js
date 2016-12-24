@@ -3,7 +3,7 @@ Array.prototype.random = function() {
 }
 
 var width, height;
-var scale = .8;
+var scale = 1;
 var colours = {
   background: '#111'
 };
@@ -107,7 +107,7 @@ var Particle = function(ctx) {
     if (d < Particle.SPEED_MODIFY_RADIUS) {
       var speedEffect = (1 - d / Particle.SPEED_MODIFY_RADIUS) *
         (1 + mouse.speedValue) * .5;
-      speed += (speedEffect - speed) * .15;
+      speed += (speedEffect - speed) * .10;
       angle += angleModifier * size * mouse.speedValue * 0.02;
     }
 
@@ -137,11 +137,11 @@ var Particle = function(ctx) {
 
 Particle.MIN_SPEED = .1 * scale;
 Particle.MAX_SPEED = 5 * scale;
-Particle.MIN_SIZE = .7 * scale;
-Particle.MAX_SIZE = 3 * scale;
+Particle.MIN_SIZE = .6 * scale;
+Particle.MAX_SIZE = 2 * scale;
 Particle.SPEED_MODIFY_RADIUS = 150;
 
-var particles = _.map(Array(3000), function() {
+var particles = _.map(Array(2500), function() {
   return new Particle(ctx);
 })
 
