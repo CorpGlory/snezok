@@ -20,7 +20,7 @@ var language = window.navigator.userLanguage || window.navigator.language;
 
 Lang.local = Lang.res.en;
 
-if(language.toLocaleLowerCase().indexOf('ru') == -1) {
+if(language.toLocaleLowerCase().indexOf('ru') > -1) {
   Lang.local = Lang.res.ru;
   document.title = Lang.local['meta.title'];
   var meta=document.getElementsByTagName("meta");
