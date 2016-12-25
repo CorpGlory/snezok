@@ -22,10 +22,7 @@ var GRect = function() {
   }
 
   function touch(particle, pos) {
-    if(GeometryBitmap.getFill(pos.x, pos.y)) {
-      return 0;
-    }
-    return 1;
+    return GeometryBitmap.getFill(pos.x, pos.y);
   }
 
   function render(ctx) {
@@ -96,10 +93,11 @@ var Particle = function(ctx) {
   var speed = speedBase;
 
   var size = Particle.MIN_SIZE + Particle.MAX_SIZE * pos.z;
+  var touched = false;
 
   // g object is something which can change my speed
   function touch(gobject) {
-    speed *= gobject.touch(this, pos);
+    touched = gobject.touch(this, pos);
   }
 
   function update(time) {
@@ -108,14 +106,26 @@ var Particle = function(ctx) {
     var d = distanceBetween(pos, mouse);
     var a = angleBetween(pos, mouse);
 
-    if (d < Particle.SPEED_MODIFY_RADIUS) {
-      var speedEffect = (1 - d / Particle.SPEED_MODIFY_RADIUS) *
-        (1 + mouse.speedValue) * .5;
-      speed += (speedEffect - speed) * .10;
-      angle += angleModifier * size * mouse.speedValue * 0.02;
+    if(touched) {
+      speed = 0;
     }
 
+    if (d < Particle.SPEED_MODIFY_RADIUS) {
+      var speedEffect = (1 - d / Particle.SPEED_MODIFY_RADIUS);
+      speedEffect *= (1 + mouse.speedValue) * 0.02;
+
+      if(touched) {
+        speedEffect *= 30;
+      }
+      //speedEffect = 0;
+
+      speed += speedEffect;
+      angle -= angleModifier * size * mouse.speedValue * 0.02;
+    }
+
+
     speed += (speedBase - speed) * .03;
+
     angle += (angleBase - angle) * angleLerp;
 
     var amod = angle + Math.cos(time * timeModifier * 0.001) * .25;
@@ -145,7 +155,7 @@ Particle.MIN_SIZE = .6 * scale;
 Particle.MAX_SIZE = 2 * scale;
 Particle.SPEED_MODIFY_RADIUS = 150;
 
-var particles = _.map(Array(3000), function() {
+var particles = _.map(Array(3500), function() {
   return new Particle(ctx);
 })
 
@@ -168,6 +178,8 @@ function update(time) {
       p.update(time);
     });
 
+
+
     //grect.render(ctx);
 
     if(EDIT_MODE) {
@@ -175,11 +187,7 @@ function update(time) {
       EditCursor.render(ctx);
     }
 
-    mouse.speedTarget *= .95;
-    mouse.speedCurrent += (mouse.speedTarget - mouse.speedCurrent) * .9;
-    mouse.speedValue = mouse.speedCurrent < 5 ? mouse.speedCurrent / 5 : 5;
-
-    Particle.SPEED_MODIFY_RADIUS = mouse.speedCurrent * 5;
+    updateMouse();
 
   }
 
@@ -195,7 +203,8 @@ var mouse = {
   angle: 0,
   speedTarget: 0,
   speedCurrent: 0,
-  speedValue: 0
+  speedValue: 0,
+  health: 0
 };
 
 window.addEventListener('mousemove', mouseMoveHandler);
@@ -209,6 +218,16 @@ function mouseMoveHandler(event) {
   }
   mouse.x = event.x * scale;
   mouse.y = event.y * scale;
+}
+
+function updateMouse(time) {
+
+  mouse.speedTarget *= .95;
+  if(mouse.speedTarget < 0.1) {
+    mouse.speedTarget = 0;
+  }
+  mouse.speedCurrent += (mouse.speedTarget - mouse.speedCurrent) * 0.9;
+  mouse.speedValue = mouse.speedCurrent < 5 ? mouse.speedCurrent / 5 : 5;
 }
 
 function distanceBetween(a, b) {
