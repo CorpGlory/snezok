@@ -115,7 +115,7 @@ canvas {
   font-style: normal;
   font-weight: normal;
   speak: none;
-
+  font-size: 1.2em;
   display: inline-block;
   text-decoration: inherit;
   width: 1em;
@@ -132,7 +132,7 @@ canvas {
 
   /* Animation center compensation - margins should be symmetric */
   /* remove if not needed */
-  margin-left: .2em;
+  margin-left: 0
 
   /* You can be more comfortable with increased icons size */
   /* font-size: 120%; */
@@ -155,5 +155,5 @@ canvas {
   position: absolute;
   width: 120px;
   bottom: 5%;
-  right: 20px;
+  right: 10px;
 }
