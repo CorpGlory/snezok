@@ -72,8 +72,6 @@ resize();
 window.addEventListener('resize', resize);
 GeometryBitmap.setText(TEXT);
 
-
-
 //var grect = new GRect(width / 4, height / 4, width / 2, height / 2);
 
 var Particle = function(ctx) {

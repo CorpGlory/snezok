@@ -23,6 +23,7 @@ GeometryBitmap.resize = function(width, height) {
   GeometryBitmap.canvas.height = height;
   GeometryBitmap.FONT_SIZE = GeometryBitmap.width / 9;
   GeometryBitmap.LINE_HEIGHT = GeometryBitmap.height / 8;
+  GeometryBitmap.LINE_HEIGHT = Math.max(GeometryBitmap.LINE_HEIGHT, GeometryBitmap.FONT_SIZE + 10)
   GeometryBitmap.setText(GeometryBitmap.text);
 }
 
@@ -66,7 +67,7 @@ GeometryBitmap.setText = function(text) {
     });
 
     GeometryBitmap._lastPosition[0] = context.measureText(line).width / 2
-      + GeometryBitmap.width / 2 - 20;
+      + GeometryBitmap.width / 2 - GeometryBitmap.FONT_SIZE / 7;
     GeometryBitmap._lastPosition[1] = basicOffset + totalHeight
       - GeometryBitmap.FONT_SIZE;
 
