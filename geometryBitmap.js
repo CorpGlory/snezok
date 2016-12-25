@@ -21,6 +21,8 @@ GeometryBitmap.resize = function(width, height) {
   GeometryBitmap.height = height;
   GeometryBitmap.canvas.width = width;
   GeometryBitmap.canvas.height = height;
+  GeometryBitmap.FONT_SIZE = GeometryBitmap.width / 10;
+  GeometryBitmap.LINE_HEIGHT = GeometryBitmap.height / 8;
   GeometryBitmap.setText(GeometryBitmap.text);
 }
 

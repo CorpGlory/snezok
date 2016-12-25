@@ -14,6 +14,7 @@ var colours = {
 
 var canvas = $('#render').get()[0];
 var ctx = canvas.getContext('2d');
+var particles = Array(3500);
 
 var GRect = function() {
   var api = {
@@ -55,17 +56,23 @@ EditCursor.render = function(ctx) {
   ctx.fillRect(pos[0], y, w, h);
 }
 
-
 GeometryBitmap.init();
-
 function resize() {
   width = canvas.width = window.innerWidth * scale;
   height = canvas.height = window.innerHeight * scale;
   GeometryBitmap.resize(width, height);
+  if(particles[0]) {
+    _.each(particles, function(p) {
+      p.resize();
+    })
+  }
+
 }
 resize();
 window.addEventListener('resize', resize);
 GeometryBitmap.setText(TEXT);
+
+
 
 //var grect = new GRect(width / 4, height / 4, width / 2, height / 2);
 
@@ -79,7 +86,8 @@ var Particle = function(ctx) {
 
   var api = {
     update: update,
-    touch: touch
+    touch: touch,
+    resize: resize
   }
 
   var angleLerp = .025 + Math.random() * .05;
@@ -94,6 +102,13 @@ var Particle = function(ctx) {
 
   var size = Particle.MIN_SIZE + Particle.MAX_SIZE * pos.z;
   var touched = false;
+
+  function resize() {
+    var ss = Math.min(canvas.width, canvas.height) / 1000;
+    size = Particle.MIN_SIZE + Particle.MAX_SIZE * pos.z * ss;
+    speedBase = Particle.MIN_SPEED + Particle.MAX_SPEED * pos.z * ss;
+  }
+  resize();
 
   // g object is something which can change my speed
   function touch(gobject) {
@@ -155,9 +170,10 @@ Particle.MIN_SIZE = .6 * scale;
 Particle.MAX_SIZE = 2 * scale;
 Particle.SPEED_MODIFY_RADIUS = 150;
 
-var particles = _.map(Array(3500), function() {
+var particles = _.map(particles, function() {
   return new Particle(ctx);
-})
+});
+
 
 // Per frame updates
 update();
