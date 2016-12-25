@@ -102,11 +102,13 @@ var Particle = function(ctx) {
 
   var size = Particle.MIN_SIZE + Particle.MAX_SIZE * pos.z;
   var touched = false;
+  var speedModityRadius = Particle.SPEED_MODIFY_RADIUS;
 
   function resize() {
     var ss = Math.min(canvas.width, canvas.height) / 1000;
     size = Particle.MIN_SIZE + Particle.MAX_SIZE * pos.z * ss;
     speedBase = Particle.MIN_SPEED + Particle.MAX_SPEED * pos.z * ss;
+    speedModityRadius = Particle.SPEED_MODIFY_RADIUS * ss;
   }
   resize();
 
@@ -125,8 +127,9 @@ var Particle = function(ctx) {
       speed = 0;
     }
 
-    if (d < Particle.SPEED_MODIFY_RADIUS) {
-      var speedEffect = (1 - d / Particle.SPEED_MODIFY_RADIUS);
+
+    if (d < speedModityRadius) {
+      var speedEffect = (1 - d / speedModityRadius);
       speedEffect *= (1 + mouse.speedValue) * 0.02;
 
       if(touched) {
@@ -168,7 +171,7 @@ Particle.MIN_SPEED = .1 * scale;
 Particle.MAX_SPEED = 5 * scale;
 Particle.MIN_SIZE = .6 * scale;
 Particle.MAX_SIZE = 2 * scale;
-Particle.SPEED_MODIFY_RADIUS = 150;
+Particle.SPEED_MODIFY_RADIUS = 250;
 
 var particles = _.map(particles, function() {
   return new Particle(ctx);
