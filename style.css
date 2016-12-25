@@ -31,7 +31,7 @@ canvas {
 }
 #footer {
   position: absolute;
-  height: 8%;
+  height: 10%;
   min-height: 50px;
   bottom: 0;
   width: 100%;
@@ -71,8 +71,11 @@ canvas {
   background: #555
 }
 .actionBtn {
-  position:absolute; left: 20px;
+  display: block;
+  position: relative;
+  margin: auto;
   z-index: 999999;
+  width: 50%;
 }
 #inputForm {
   display: none;
@@ -83,9 +86,7 @@ canvas {
   bottom: 14%;
   text-align: center;
 }
-#editButton {
-  display: none;
-}
+
 #logo {
   position: absolute;;
   z-index: 99999;
@@ -152,8 +153,9 @@ canvas {
 }
 
 .socialButtons {
-  position: absolute;
+  margin: auto;
   width: 120px;
-  bottom: 5%;
-  right: 10px;
+  height: 0px;
+  position: relative;
+  top: -50px;
 }

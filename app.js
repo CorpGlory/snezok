@@ -221,13 +221,11 @@ function angleBetween(a, b) {
   return Math.atan2(a.y-b.y, a.x-b.x);
 }
 
-
 if(EDIT_MODE) {
   TextInput.init();
 } else {
-  $('#editButton').show();
+  $('.viewFooter').show();
 }
-
 
 function gotoEdit() {
   window.location = '#/edit/' + strEncode(TEXT);

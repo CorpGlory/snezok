@@ -12,7 +12,7 @@
   <script src="encoding.js"></script>
   <script src="lang.js"></script>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
 </head>
 
 <body>
@@ -45,13 +45,21 @@
     </div>
     <textarea id="textInput" maxlength="40"></textarea>
     <div id="footer">
-      <a href="javascript:TextInput.submit()"  class="btn actionBtn" >
+      <a href="javascript:TextInput.submit()" class="btn actionBtn" >
         <script> document.write(Lang.local['ui.save']) </script>
       </a>
     </div>
   </div>
 
-  <div id="footer">
+  <div id="footer" class='viewFooter' style="display:none">
+
+    <div class="socialButtons">
+      <a href="mailto:yourfriend@gmail.com" class="the-icons span3"><i class="demo-icon icon-mail">&#xe800;</i></a>
+      <a data-social="facebook" href="#" class="the-icons span3"><i class="demo-icon icon-facebook">&#xf09a;</i></a>
+      <a data-social="vkontakte" href="#" class="the-icons span3"><i class="demo-icon icon-vkontakte">&#xf189;</i></a>
+      <a data-social="twitter" href="#" class="the-icons span3"><i class="demo-icon icon-twitter">&#xf099;</i></a>
+    </div>
+
     <a href="javascript:gotoEdit()" id="editButton" class="btn actionBtn" >
       <script> document.write(Lang.local['ui.edit']) </script>
     </a>
@@ -61,20 +69,10 @@
     <img src="imgs/PM_Logo.svg">
   </a>
 
-  <div class="socialButtons">
-    <a href="mailto:yourfriend@gmail.com" class="the-icons span3"><i class="demo-icon icon-mail">&#xe800;</i></a>
-    <a data-social="facebook" href="#" class="the-icons span3"><i class="demo-icon icon-facebook">&#xf09a;</i></a>
-    <a data-social="vkontakte" href="#" class="the-icons span3"><i class="demo-icon icon-vkontakte">&#xf189;</i></a>
-    <a data-social="twitter" href="#" class="the-icons span3"><i class="demo-icon icon-twitter">&#xf099;</i></a>
-  </div>
-
-
   <script src="geometryBitmap.js"></script>
   <script src="textInput.js"></script>
   <script src="app.js"></script>
   <script src="https://cdn.jsdelivr.net/jquery.goodshare.js/4/goodshare.min.js"></script>
-
-
 
   <!-- Yandex.Metrika counter --> <script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter41804089 = new Ya.Metrika({ id:41804089, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, trackHash:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/41804089" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
 </body>
