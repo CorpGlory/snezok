@@ -236,6 +236,16 @@ function mouseMoveHandler(event) {
   mouse.y = event.y * scale;
 }
 
+document.ontouchmove = function(e) {
+  if(e.touches.length == 1){ // Only deal with one finger
+    var touch = e.touches[0]; // Get the information for finger #1
+    mouseMoveHandler({
+      x:touch.pageX, y: touch.pageY
+    })
+  }
+  e.preventDefault();
+}
+
 function updateMouse(time) {
 
   mouse.speedTarget *= .95;
