@@ -6,4 +6,4 @@ Special for [The Moscow Polytechnic Museum](https://polymus.ru/eng/)
 
 Works on mobile phone too ;)
 
-[more info] http://corpglory.com/blog/snezok/
+more info: http://corpglory.com/blog/snezok/
