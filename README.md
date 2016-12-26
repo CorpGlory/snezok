@@ -1,6 +1,6 @@
 # Snezok
 
-Create your [snowy message](//jonyrock.github.io/snezok/)
+Create your [snowy message](http://ny2017.polymus.ru/)
 
 Special for [The Moscow Polytechnic Museum](https://polymus.ru/eng/)
 
